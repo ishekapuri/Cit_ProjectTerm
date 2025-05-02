@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome</h1>
+<div class="d-flex flex-wrap">
+    <div class="m-2 p-3 border border-black text-center">
+        <a href="{{ url_for('html_routes.collections') }}">See Collections</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+id,name,answer,flipped,stack_id
+1,What is the function of ribosomes?,Protein synthesis,False,1
+2,Which body system fights infections?,Immune system,False,1
+3,What organ filters blood in the human body?,Kidney,False,1
+4,What is the powerhouse of the cell?,Mitochondria,False,1
+5,What process do plants use to make food?,Photosynthesis,False,1
+6,What is the function of ribosomes?,Protein synthesis,False,1
+7,What is the powerhouse of the cell?,Mitochondria,False,1
+8,Which body system fights infections?,Immune system,False,1
+9,What blood cells carry oxygen?,Red blood cells,False,1
+10,What is the function of ribosomes?,Protein synthesis,False,1
+11,What blood cells carry oxygen?,Red blood cells,False,2
+12,What type of cell lacks a nucleus?,Prokaryotic cell,False,2
+13,What is the name of the sugar found in DNA?,Deoxyribose,False,2
+14,What is the function of ribosomes?,Protein synthesis,False,2
+15,Which body system fights infections?,Immune system,False,2
+16,What is the name of the sugar found in DNA?,Deoxyribose,False,2
+17,What organ filters blood in the human body?,Kidney,False,2
+18,What process do plants use to make food?,Photosynthesis,False,2
+19,What blood cells carry oxygen?,Red blood cells,False,2
+20,Which body system fights infections?,Immune system,False,2
+21,What type of bond shares electrons?,Covalent bond,False,3
+22,What type of bond shares electrons?,Covalent bond,False,3
+23,What is the chemical symbol for gold?,Au,False,3
+24,What is the main component of table salt?,Sodium chloride,False,3
+25,What does a catalyst do in a reaction?,Speeds it up,False,3
+26,What is the most abundant gas in Earth's atmosphere?,Nitrogen,False,3
+27,What element has the atomic number 1?,Hydrogen,False,3
+28,What element has the atomic number 1?,Hydrogen,False,3
+29,What is Avogadro's number?,6.022 x 10^23,False,3
+30,What is the process of a solid turning directly into gas?,Sublimation,False,3
+31,What element has the atomic number 1?,Hydrogen,False,4
+32,What is the process of a solid turning directly into gas?,Sublimation,False,4
+33,What does a catalyst do in a reaction?,Speeds it up,False,4
+34,What is the chemical symbol for gold?,Au,False,4
+35,What type of bond shares electrons?,Covalent bond,False,4
+36,What is the chemical symbol for gold?,Au,False,4
+37,What is the process of a solid turning directly into gas?,Sublimation,False,4
+38,What is the charge of an electron?,Negative,False,4
+39,What is Avogadro's number?,6.022 x 10^23,False,4
+40,What element has the atomic number 1?,Hydrogen,False,4
+41,What is the binary system based on?,2,False,5
+42,What is the purpose of a compiler?,Translates code to machine language,False,5
+43,What does RAM stand for?,Random Access Memory,False,5
+44,What is the purpose of a compiler?,Translates code to machine language,False,5
+45,What is the purpose of a compiler?,Translates code to machine language,False,5
+46,What does 'bug' mean in programming?,An error in code,False,5
+47,What is a loop?,A structure that repeats code,False,5
+48,What is the main language of the web?,JavaScript,False,5
+49,What is an API?,Application Programming Interface,False,5
+50,What does 'bug' mean in programming?,An error in code,False,5
+51,What is an API?,Application Programming Interface,False,6
+52,What does RAM stand for?,Random Access Memory,False,6
+53,What is a variable in programming?,A named storage for data,False,6
+54,What is the purpose of a compiler?,Translates code to machine language,False,6
+55,What is an algorithm?,A set of instructions to solve a problem,False,6
+56,What does 'bug' mean in programming?,An error in code,False,6
+57,What is a loop?,A structure that repeats code,False,6
+58,What is an algorithm?,A set of instructions to solve a problem,False,6
+59,What is the main language of the web?,JavaScript,False,6
+60,What is the binary system based on?,2,False,6
+61,What is the derivative of x^2?,2x,False,7
+62,What is the sum of interior angles of a triangle?,180 degrees,False,7
+63,What is 7 factorial?,5040,False,7
+64,What is the sum of interior angles of a triangle?,180 degrees,False,7
+65,What is the area of a circle?,πr^2,False,7
+66,What is 3 cubed?,27,False,7
+67,What is the sum of interior angles of a triangle?,180 degrees,False,7
+68,What is the derivative of x^2?,2x,False,7
+69,What is 3 cubed?,27,False,7
+70,What is an isosceles triangle?,A triangle with two equal sides,False,7
+71,What is the slope of a horizontal line?,0,False,8
+72,What is 15% of 200?,30,False,8
+73,What is 7 factorial?,5040,False,8
+74,What is 3 cubed?,27,False,8
+75,What is 15% of 200?,30,False,8
+76,What is the Pythagorean Theorem?,a^2 + b^2 = c^2,False,8
+77,What is the square root of 81?,9,False,8
+78,What is 15% of 200?,30,False,8
+79,What is the square root of 81?,9,False,8
+80,What is an isosceles triangle?,A triangle with two equal sides,False,8
+81,What does E=mc^2 represent?,Mass-energy equivalence,False,9
+82,What is the unit of frequency?,Hertz,False,9
+83,What law explains action and reaction?,Newton’s Third Law,False,9
+84,What law explains action and reaction?,Newton’s Third Law,False,9
+85,What law explains action and reaction?,Newton’s Third Law,False,9
+86,What is the speed of sound in air?,343 m/s,False,9
+87,What is the unit of electric current?,Ampere,False,9
+88,What is the symbol for acceleration due to gravity?,g,False,9
+89,What is Ohm’s Law?,V = IR,False,9
+90,What is the symbol for acceleration due to gravity?,g,False,9
+91,What does E=mc^2 represent?,Mass-energy equivalence,False,10
+92,What is inertia?,Resistance to change in motion,False,10
+93,What is the symbol for acceleration due to gravity?,g,False,10
+94,What law explains action and reaction?,Newton’s Third Law,False,10
+95,What is the symbol for acceleration due to gravity?,g,False,10
+96,What does E=mc^2 represent?,Mass-energy equivalence,False,10
+97,What is the speed of sound in air?,343 m/s,False,10
+98,What is the unit of electric current?,Ampere,False,10
+99,What is the symbol for acceleration due to gravity?,g,False,10
+100,What is inertia?,Resistance to change in motion,False,10
+101,What is a tariff?,A tax on imports,False,11
+102,What is opportunity cost?,The value of the next best alternative,False,11
+103,What is a budget deficit?,Excess of spending over revenue,False,11
+104,What is a budget deficit?,Excess of spending over revenue,False,11
+105,What is demand elasticity?,Responsiveness of demand to price changes,False,11
+106,What is a budget deficit?,Excess of spending over revenue,False,11
+107,What is fiscal policy?,Government spending and taxation,False,11
+108,What is monetary policy?,Control of money supply and interest rates,False,11
+109,What is monetary policy?,Control of money supply and interest rates,False,11
+110,What is a tariff?,A tax on imports,False,11
+111,What is opportunity cost?,The value of the next best alternative,False,12
+112,What is opportunity cost?,The value of the next best alternative,False,12
+113,What is fiscal policy?,Government spending and taxation,False,12
+114,What is monetary policy?,Control of money supply and interest rates,False,12
+115,What is the law of diminishing returns?,Decreased output from increased input,False,12
+116,What is fiscal policy?,Government spending and taxation,False,12
+117,What is fiscal policy?,Government spending and taxation,False,12
+118,What is monetary policy?,Control of money supply and interest rates,False,12
+119,What is a budget deficit?,Excess of spending over revenue,False,12
+120,What is the law of diminishing returns?,Decreased output from increased input,False,12

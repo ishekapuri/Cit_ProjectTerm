@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Stacks in {{ collection }}</h1>
+<div class="d-flex flex-wrap">
+    {% for stack in data %}
+    <div class="m-2 p-3 border border-black text-center">
+        <h4>{{ stack.name }}</h4>
+        <h6>{{ stack.countCards() }} Cards</h6>
+        <a href="{{ url_for('html_routes.cards', collection_name=collection, stack_name=stack.name)}}">See Cards</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
