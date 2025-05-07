@@ -5,7 +5,20 @@
 <h1>Collections list</h1>
 <div class="d-flex flex-wrap">
     {% for collection in data %}
-    <div class="m-2 p-3 border border-black text-center">
+    <div class="card-box m-2 p-3 border border-black text-center">
+
+        <div class="edit-button">
+            <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+        </div>
+
+        <div class="delete-button">
+            <button class="btn btn-sm btn-outline-danger" title="Delete">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+
         <h4>{{ collection.name }}</h4>
         <h6>{{ collection.countStacks() }} stacks</h6>
         <a href="{{ url_for('html_routes.stacks', collection_name=collection.name) }}">See Stacks</a>
