@@ -1,46 +1,52 @@
 /* General Body Styling */
 body {
-    background-color: #f5f0fa;
-    color: #4b007d;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f0fa;
+  color: #4b007d;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Container */
 .container {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(75, 0, 125, 0.1);
-    margin-top: 2rem;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(75, 0, 125, 0.1);
+  margin-top: 2rem;
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
-    color: #5e2ca5;
-    font-weight: 600;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  color: #5e2ca5;
+  font-weight: 600;
 }
 
 /* Links */
 a {
-    color: #7c4dff;
-    text-decoration: none;
+  color: #7c4dff;
+  text-decoration: none;
 }
 
 a:hover {
-    color: #4b007d;
-    text-decoration: underline;
+  color: #4b007d;
+  text-decoration: underline;
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #7c4dff;
-    border-color: #7c4dff;
-    color: white;
+  background-color: white;
+  border-color: black;
+  color: #7c4dff;
 }
 
 .btn-primary:hover {
-    background-color: #5e2ca5;
-    border-color: #5e2ca5;
+  background-color: #5e2ca5;
+  border-color: black;
 }
 
 /* Inputs and Forms */
@@ -49,25 +55,27 @@ input[type="email"],
 input[type="password"],
 textarea,
 select {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
 }
 
-input:focus, textarea:focus, select:focus {
-    border-color: #7c4dff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(124, 77, 255, 0.5);
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #7c4dff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(124, 77, 255, 0.5);
 }
 
 /* Custom utility classes */
 .text-purple {
-    color: #5e2ca5;
+  color: #5e2ca5;
 }
 
 .bg-purple {
-    background-color: #e1d5f6;
+  background-color: #e1d5f6;
 }
