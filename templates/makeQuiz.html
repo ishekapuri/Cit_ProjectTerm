@@ -21,11 +21,10 @@
                     {% for stack in quiz.stacks %}
                         <div class="m-2 p-3 border border-black">
                             <h6>{{ stack.name }}</h6>
+                            <a href="{{ url_for('html_routes.cards', collection_name=quiz.name, stack_name=stack.name) }}">See Stack</a>
                         </div>
                     {% endfor %}
-                </div>
-            {% endfor %}
-            <a href="{{ url_for('html_routes.make_quiz')}}">Make a quiz</a>
+            </div>
         </div>   
 
         <div>
