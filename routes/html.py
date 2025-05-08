@@ -12,15 +12,44 @@ def home():
 
 @html_routes.route("/makeQuiz", methods=["GET"])
 def make_quiz():
-    return render_template("makeQuiz.html")
+    collections = db.session.execute(db.select(Collection)).scalars()
+    return render_template("makeQuiz.html", collections=collections)
 
 @html_routes.route("/makeQuiz", methods=["POST"])
 def make_quiz_post():
+    collections = db.session.execute(db.select(Collection)).scalars()
+    quizzes = db.session.execute(db.select(Quiz)).scalars()
+
     quiz_name = request.form.get("quiz_name")
+    if quiz_name == "":
+        return render_template("makeQuiz.html", 
+                               error="Please enter a name for the quiz.",
+                                collections=collections,
+                                quizzes=quizzes)
+    if db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar() is not None:
+        return render_template("makeQuiz.html", 
+                               error="Quiz name already exists.",
+                                collections=collections,
+                                quizzes=quizzes)
+    
     quiz = Quiz(name=quiz_name)
     db.session.add(quiz)
+    stack_ids = request.form.getlist("stack_ids")
+
+    if len(stack_ids) == 0:
+        return render_template("makeQuiz.html", 
+                               error="Please select at least one stack.",
+                                collections=collections,
+                                quizzes=quizzes)
+    
+    for stack_id in stack_ids:
+        stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
+        db.session.add(StackQuiz(quiz=quiz, stack=stack))
     db.session.commit()
-    return render_template("makeQuiz.html", quiz=quiz)
+
+
+    # goes to home after creating quiz (for now)
+    return render_template("home.html", collections=collections, quizzes=quizzes)
 
 # COLLECTION LIST ==========================================================
 @html_routes.route("/collections")
@@ -47,8 +76,6 @@ def quizzes():
     quizzes = db.session.execute(db.select(Quiz)).scalars()
     return render_template("quizzes.html", data=quizzes)
 
-# @html_routes.route("/makeQuiz", methods=["POST"])
-# def make_quiz():
 
 
 

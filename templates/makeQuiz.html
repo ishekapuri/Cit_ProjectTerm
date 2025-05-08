@@ -9,46 +9,38 @@
 
 <body>
     <div class="container">
-        <h1>Welcome</h1>
         <div>
-            <h2>Quizzes</h2>
-            {% for quiz in quizzes %}
-            <div>
-                <div>
-                    <h4>{{ quiz.name }}</h4>
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    <h4>{{ error }}</h4>
                 </div>
-                <div class="m-2 p-3 border border-black d-flex flex-wrap">
-                    {% for stack in quiz.stacks %}
-                        <div class="m-2 p-3 border border-black">
-                            <h6>{{ stack.name }}</h6>
-                            <a href="{{ url_for('html_routes.cards', collection_name=quiz.name, stack_name=stack.name) }}">See Stack</a>
-                        </div>
-                    {% endfor %}
-            </div>
-        </div>   
+            {% endif %}
 
-        <div>
-            <h2>Collections</h2>
-            {% for collection in collections %}
-            <div>
-                <div>
-                    <h4>{{ collection.name }}</h4>
-                </div>
-                <div class="m-2 p-3 border border-black d-flex flex-wrap">
-                    {% for stack in collection.stacks %}
-                        <div class="m-2 p-3 border border-black">
-                            <h6>{{ stack.name }}</h6>
-                            <a href="{{ url_for('html_routes.cards', collection_name=collection.name, stack_name=stack.name) }}">See Stack</a>
+            <h2>Create a New Quiz</h2>
+            <p>Choose a name for your quiz and check the stacks you want to include.</p>
+            <form method="post" action="{{ url_for('html_routes.make_quiz') }}">
+                <input type="text" name="quiz_name" id="quiz_name" placeholder="Quiz Name"> <br>
+                {% for collection in collections %}
+                    <div>
+                        <div>
+                            <h4>{{ collection.name }}</h4>
                         </div>
-                    {% endfor %}
-                </div>        
-            </div>
-            {% endfor %}    
+                        <div class="m-2 p-3 border border-black d-flex flex-wrap">
+                            {% for stack in collection.stacks %}
+                                <div class="m-2 p-3 border border-black d-flex flex-wrap">
+                                    <h6>{{ stack.name }}</h6>
+                                    <input type="checkbox" name="stack_ids" id="stack_ids" value="{{ stack.id }}">
+                                </div>
+                            {% endfor %}
+                        </div>        
+                    </div>
+
+                {% endfor %}  
+                <button type="submit">Confirm</button>  
+            </form>
         </div>
-
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

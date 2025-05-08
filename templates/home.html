@@ -18,7 +18,7 @@
                     <h4>{{ quiz.name }}</h4>
                 </div>
                 <div class="m-2 p-3 border border-black d-flex flex-wrap">
-                    {% for stack in quiz.stacks %}
+                    {% for stack in quiz.getStacks() %}
                         <div class="m-2 p-3 border border-black">
                             <h6>{{ stack.name }}</h6>
                         </div>
