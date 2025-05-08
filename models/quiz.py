@@ -18,3 +18,10 @@ class Quiz(db.Model):
         stackQuiz = StackQuiz(self.id, stack_id)
         db.session.add(stackQuiz)
         db.session.commit()
+
+    def getStacks(self):
+        stackQuizzes = db.session.execute(db.select(StackQuiz).where(StackQuiz.quiz_id == self.id)).scalars()
+        stacks = []
+        for stackQuiz in stackQuizzes:
+            stacks.append(stackQuiz.stack)
+        return stacks

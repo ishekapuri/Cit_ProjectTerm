@@ -6,10 +6,6 @@ import random
 class StackQuiz(db.Model):
     __tablename__ ="stackQuiz_table"
 
-    def __init__(self):
-        self.questions = self.getRandomQuestions()
-        self.completedQuestions = []
-
     quiz_id = mapped_column(Integer, ForeignKey("quiz_table.id"), primary_key=True)
     stack_id = mapped_column(Integer, ForeignKey("stack_table.id"), primary_key=True)
 
