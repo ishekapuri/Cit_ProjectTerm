@@ -79,3 +79,48 @@ select:focus {
 .bg-purple {
   background-color: #e1d5f6;
 }
+/* Changes to home*/
+#stackList {
+  overflow: auto;
+  white-space: nowrap;
+  margin: 2px;
+  padding: 3px;
+  display: flex;
+  height: 120px;
+  align-items: center;
+}
+
+.collapsible {
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.collapsible:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn-stack {
+  width: 120px;
+  height: 80px;
+  margin-right: 10px;
+  text-wrap: auto;
+  box-shadow: 5px -5px 0 -3px white, 5px -5px teal, 10px -10px 0 -3px white,
+    10px -10px teal;
+  transition: box-shadow 1s, top 1s, left 1s;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.btn-stack:hover {
+  top: -10px;
+  left: 10px;
+  box-shadow: 0px 0px 0 -3px white, 0px 0px teal, 0px 0px 0 -3px white,
+    0px 0px teal;
+}
