@@ -51,6 +51,12 @@ def make_quiz_post():
     # goes to home after creating quiz (for now)
     return render_template("home.html", collections=collections, quizzes=quizzes)
 
+@html_routes.route("/<string:quiz_name>")
+def quiz_info(quiz_name):
+    quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
+    stacks = db.session.execute(db.select(Stack).where(Stack.id.in_(db.session.execute(db.select(StackQuiz.stack_id).where(StackQuiz.quiz_id == quiz.id)).scalars()))).scalars()
+    return render_template("quiz_info.html", quiz=quiz, stacks=stacks)
+
 # COLLECTION LIST ==========================================================
 @html_routes.route("/collections")
 def collections():
