@@ -10,14 +10,38 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   </head>
 
   <body>
     <div class="container">
+      <div class="edit-toggle-container">
+        <label class="switch me-2">
+            <input type="checkbox" id="editToggle">
+            <span class="slider"></span>
+        </label>
+        <label for="editToggle" class="form-label">Edit Mode</label>
+      </div>
+
       <h1>Cards in {{ stack }}</h1>
       <div class="d-flex flex-wrap justify-content-center">
         {% for card in data %}
-        <div class="m-2 p-3 border border-black text-center">
+        <div class="card-containers m-2 p-3 border border-black text-center">
+
+          <div class="edit-button">
+            <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+          </div>
+
+          <div class="delete-button">
+            <form method="POST" action="{{ url_for('html_routes.delete_card', card_id=card.id) }}" onsubmit="return confirm('Delete this card?');">
+              <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </form>
+          </div>
+
           <h4>{{ card.name }}</h4>
         </div>
         {% endfor %}

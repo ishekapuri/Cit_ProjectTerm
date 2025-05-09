@@ -79,3 +79,19 @@ def quizzes():
 
 
 
+# # DELETE CARD ========================================
+
+
+@html_routes.route("/delete_card/<int:card_id>", methods=["POST"])
+@html_routes.route("/delete_card/<int:card_id>", methods=["POST"])
+def delete_card(card_id):
+    card = db.session.get(Card, card_id)
+    stack_id = card.stack_id
+    db.session.delete(card)
+    db.session.commit()
+
+    stack = db.session.get(Stack, stack_id)
+    cards = db.session.execute(
+    db.select(Card).where(Card.stack_id == stack_id)).scalars()
+    
+    return render_template("cards.html", stack=stack.name, data=cards)
