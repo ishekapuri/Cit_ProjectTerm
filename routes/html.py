@@ -83,7 +83,6 @@ def quizzes():
 
 
 @html_routes.route("/delete_card/<int:card_id>", methods=["POST"])
-@html_routes.route("/delete_card/<int:card_id>", methods=["POST"])
 def delete_card(card_id):
     card = db.session.get(Card, card_id)
     stack_id = card.stack_id
