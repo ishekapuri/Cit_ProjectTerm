@@ -1,6 +1,7 @@
 from db import db
 from app import app
 from models import Quiz, Stack, StackQuiz
+import pytest
 
 class TestQuiz:
     def setup_method(self):
