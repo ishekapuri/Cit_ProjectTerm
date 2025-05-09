@@ -227,3 +227,7 @@ input:checked + .slider:before {
   gap: 10px;
   margin-bottom: 1rem;
 }
+
+.hidden {
+  display: none;
+}

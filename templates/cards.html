@@ -12,7 +12,7 @@
     <div class="container">
       <div class="edit-toggle-container">
         <label class="switch me-2">
-            <input type="checkbox" id="editToggle">
+            <input type="checkbox" id="editToggle" onchange="toggleButtons()">
             <span class="slider"></span>
         </label>
         <label for="editToggle" class="form-label">Edit Mode</label>
@@ -23,19 +23,20 @@
             <div class="flashcardcontent">
                 <div class="card-inner">
                     <div class="card-front">
-                      <div class="edit-button">
-                        <button class="btn btn-sm btn-outline-secondary" title="Edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </button>
-                      </div>
-        
-                      <div class="delete-button">
-                        <form method="POST" action="{{ url_for('html_routes.delete_card', card_id=card.id) }}" onsubmit="return confirm('Delete this card?');">
-                          <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
-                            <i class="fas fa-trash-alt"></i>
+                      
+                        <div class="edit-button">
+                          <button class="btn btn-sm btn-outline-secondary" title="Edit">
+                              <i class="fas fa-pencil-alt"></i>
                           </button>
-                        </form>
-                      </div>
+                        </div>
+          
+                        <div class="delete-button">
+                          <form method="POST" action="{{ url_for('html_routes.delete_card', card_id=card.id) }}" onsubmit="return confirm('Delete this card?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                              <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </form>
+                        </div>
                         {{ card.name }}
                     </div>
                     <div class="card-back">
