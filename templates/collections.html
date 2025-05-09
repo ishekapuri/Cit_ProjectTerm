@@ -1,16 +1,16 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <h1>Collections list</h1>
 <div class="d-flex flex-wrap">
-    {% for collection in data %}
-    <div class="m-2 p-3 border border-black text-center">
-        <h4>{{ collection.name }}</h4>
-        <h6>{{ collection.countStacks() }} stacks</h6>
-        <a href="{{ url_for('html_routes.stacks', collection_name=collection.name) }}">See Stacks</a>
-    </div>
-    {% endfor %}
+  {% for collection in data %}
+  <div class="m-2 p-3 border border-black text-center">
+    <h4>{{ collection.name }}</h4>
+    <h6>{{ collection.countStacks() }} stacks</h6>
+    <a
+      href="{{ url_for('html_routes.stacks', collection_name=collection.name) }}"
+      >See Stacks</a
+    >
+  </div>
+  {% endfor %}
 </div>
-
 {% endblock %}

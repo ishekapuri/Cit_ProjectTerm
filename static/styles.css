@@ -1,46 +1,52 @@
 /* General Body Styling */
 body {
-    background-color: #f5f0fa;
-    color: #4b007d;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f0fa;
+  color: #4b007d;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Container */
 .container {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(75, 0, 125, 0.1);
-    margin-top: 2rem;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(75, 0, 125, 0.1);
+  margin-top: 2rem;
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
-    color: #5e2ca5;
-    font-weight: 600;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  color: #5e2ca5;
+  font-weight: 600;
 }
 
 /* Links */
 a {
-    color: #7c4dff;
-    text-decoration: none;
+  color: #7c4dff;
+  text-decoration: none;
 }
 
 a:hover {
-    color: #4b007d;
-    text-decoration: underline;
+  color: #4b007d;
+  text-decoration: underline;
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #7c4dff;
-    border-color: #7c4dff;
-    color: white;
+  background-color: white;
+  border-color: black;
+  color: #7c4dff;
 }
 
 .btn-primary:hover {
-    background-color: #5e2ca5;
-    border-color: #5e2ca5;
+  background-color: #5e2ca5;
+  border-color: black;
 }
 
 /* Inputs and Forms */
@@ -49,25 +55,72 @@ input[type="email"],
 input[type="password"],
 textarea,
 select {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
 }
 
-input:focus, textarea:focus, select:focus {
-    border-color: #7c4dff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(124, 77, 255, 0.5);
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #7c4dff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(124, 77, 255, 0.5);
 }
 
 /* Custom utility classes */
 .text-purple {
-    color: #5e2ca5;
+  color: #5e2ca5;
 }
 
 .bg-purple {
-    background-color: #e1d5f6;
+  background-color: #e1d5f6;
+}
+/* Changes to home*/
+#stackList {
+  overflow: auto;
+  white-space: nowrap;
+  margin: 2px;
+  padding: 3px;
+  display: flex;
+  height: 120px;
+  align-items: center;
+}
+
+.collapsible {
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.collapsible:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn-stack {
+  width: 120px;
+  height: 80px;
+  margin-right: 10px;
+  text-wrap: auto;
+  box-shadow: 5px -5px 0 -3px white, 5px -5px teal, 10px -10px 0 -3px white,
+    10px -10px teal;
+  transition: box-shadow 1s, top 1s, left 1s;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.btn-stack:hover {
+  top: -10px;
+  left: 10px;
+  box-shadow: 0px 0px 0 -3px white, 0px 0px teal, 0px 0px 0 -3px white,
+    0px 0px teal;
 }

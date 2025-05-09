@@ -1,0 +1,6 @@
+#stackList {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+/* class="m-2 p-3 border border-black"*/
