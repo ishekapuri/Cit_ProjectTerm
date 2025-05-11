@@ -1,22 +1,26 @@
 from db import db
-from app import app
 from models import Stack, Card
+from flask import Flask
 
 class TestStack:
     def setup_method(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
-        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        self.app = Flask(__name__)
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         
-        with app.app_context():
+        db.init_app(self.app)
+        
+        with self.app.app_context():
             db.create_all()
 
     def teardown_method(self):
-        with app.app_context():
+        with self.app.app_context():
             db.session.remove()
             db.drop_all()
 
-    def test_create_quiz(self):
-        with app.app_context():
+
+    def test_create_stack(self):
+        with self.app.app_context():
             stack = Stack(name="test_stack")
             db.session.add(stack)
             db.session.commit()
@@ -28,7 +32,7 @@ class TestStack:
             assert test_stack.name == "test_stack"
 
     def test_add_card_to_stack(self):
-        with app.app_context():
+        with self.app.app_context():
             stack = Stack(name="test_stack2")
             card1 = Card(name="test_card", answer="answer")
             card2 = Card(name="test_card2", answer="answer2")

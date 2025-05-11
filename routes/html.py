@@ -25,12 +25,12 @@ def make_quiz_post():
         return render_template("makeQuiz.html", 
                                error="Please enter a name for the quiz.",
                                 collections=collections,
-                                quizzes=quizzes)
+                                quizzes=quizzes), 400
     if db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar() is not None:
         return render_template("makeQuiz.html", 
                                error="Quiz name already exists.",
                                 collections=collections,
-                                quizzes=quizzes)
+                                quizzes=quizzes), 400
     
     quiz = Quiz(name=quiz_name)
     db.session.add(quiz)
@@ -40,7 +40,7 @@ def make_quiz_post():
         return render_template("makeQuiz.html", 
                                error="Please select at least one stack.",
                                 collections=collections,
-                                quizzes=quizzes)
+                                quizzes=quizzes), 400
     
     for stack_id in stack_ids:
         stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
