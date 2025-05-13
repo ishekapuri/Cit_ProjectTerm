@@ -38,7 +38,9 @@ def app_with_data():
 
 @pytest.fixture()
 def client2(app_with_data):
-    return app_with_data.test_client()
+    app = app_with_data
+    with app.app_context():
+        yield app.test_client()
 
 def test_create_quiz_page(client2):
     response = client2.get("/makeQuiz")
@@ -50,6 +52,14 @@ def test_create_quiz_success(client2):
         "quiz_name": "Test Quiz",
         "stack_ids": ["1", "2"]
     })
+
+    quiz = db.session.execute(select(Quiz).where(Quiz.name == "Test Quiz")).scalar()
+    assert quiz is not None
+    assert quiz.name == "Test Quiz"
+    assert quiz.isComplete is False
+    assert len(quiz.contents) == 2
+    assert quiz.completedCards == str([])
+    assert quiz.remainingCards == str([{1: [1, 2]}, {2: [3]}])
     assert response.status_code == 200
 
 def test_create_quiz_fail_no_name(client2):
@@ -58,6 +68,8 @@ def test_create_quiz_fail_no_name(client2):
         "stack_ids": ["1", "2"]
     })
     assert response.status_code == 400
+    quiz = db.session.execute(select(Quiz).where(Quiz.name == "")).scalar()
+    assert quiz is None
     assert b"Please enter a name for the quiz." in response.data
 
 def test_create_quiz_fail_name_exists(client2):
@@ -74,8 +86,10 @@ def test_create_quiz_fail_name_exists(client2):
 
 def test_create_quiz_fail_no_stacks(client2):
     response = client2.post("/makeQuiz", data={
-        "quiz_name": "Test Quiz",
+        "quiz_name": "Test Quiz No Stacks",
         "stack_ids": []
     })
+    quiz = db.session.execute(select(Quiz).where(Quiz.name == "Test Quiz No Stacks")).scalar()
+    assert quiz is None
     assert response.status_code == 400
     assert b"Please select at least one stack." in response.data

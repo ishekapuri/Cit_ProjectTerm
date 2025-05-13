@@ -11,6 +11,9 @@ class Card(db.Model):
 
     stack_id = mapped_column(Integer, ForeignKey("stack_table.id"))
 
+    def __str__(self):
+        return f"Card(id={self.id}, name={self.name}, answer={self.answer}, flipped={self.flipped})"
+
 
 
     

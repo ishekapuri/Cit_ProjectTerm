@@ -24,6 +24,7 @@
                         </div>
                     {% endfor %}
                 </div>
+                <a href="{{ url_for('html_routes.quiz_info', quiz_name=quiz.name)}}">Details</a>
             {% endfor %}
             <a href="{{ url_for('html_routes.make_quiz')}}">Make a quiz</a>
         </div>   
