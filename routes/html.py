@@ -99,3 +99,39 @@ def cards(collection_name, stack_name):
 
 
 
+# # DELETE CARD ========================================
+
+
+@html_routes.route("/delete_card/<int:card_id>", methods=["POST"])
+def delete_card(card_id):
+    card = db.session.get(Card, card_id)
+    stack_id = card.stack_id
+    db.session.delete(card)
+    db.session.commit()
+
+    stack = db.session.get(Stack, stack_id)
+    cards = db.session.execute(
+    db.select(Card).where(Card.stack_id == stack_id)).scalars()
+    
+    return render_template("cards.html", stack=stack.name, data=cards)
+
+@html_routes.route('/edit/<int:card_id>', methods=['GET'])
+def edit_card(card_id):
+    card = db.session.get(Card, card_id)
+    return render_template("edit.html", card=card, collection_name=card.stack.collection.name, stack_name=card.stack.name)
+
+
+@html_routes.route('/update/<int:card_id>', methods=['POST'])
+def update_card(card_id):
+    card = db.session.get(Card, card_id)
+    stack_id = card.stack_id
+    card.name = request.form['name']
+    card.answer = request.form['answer']
+
+    db.session.commit()
+
+    stack = db.session.get(Stack, stack_id)
+    cards = db.session.execute(
+    db.select(Card).where(Card.stack_id == stack_id)).scalars()
+    
+    return render_template("cards.html", stack=stack.name, data=cards)

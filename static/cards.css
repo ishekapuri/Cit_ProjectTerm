@@ -37,8 +37,9 @@
 }
 
 .card-front {
-    background: #a084ca;
-    background-image: url('question-mark-svgrepo-com.svg');
+    background:white;
+    border: 5px solid #a084ca;
+    /* background-image: url('question-mark-svgrepo-com.svg'); */
     background-size: 25%;
     background-repeat: no-repeat;
     background-position: top;
@@ -61,3 +62,7 @@
     background-position-y: 10%;
     color: white;
 }
+
+.hidden {
+    display: none;
+  }
