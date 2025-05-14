@@ -1,7 +1,7 @@
 from db import db
 from sqlalchemy.orm import mapped_column, relationship
 from sqlalchemy import Integer, String, Boolean
-from models import StackQuiz
+from models import StackQuiz, Stack
 
     
 class Quiz(db.Model):
@@ -15,7 +15,7 @@ class Quiz(db.Model):
     contents = relationship("StackQuiz", back_populates="quiz")
 
     def addStack(self, stack_id):
-        stackQuiz = StackQuiz(self.id, stack_id)
+        stackQuiz = StackQuiz(quiz=self, stack=db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar())
         db.session.add(stackQuiz)
         db.session.commit()
 

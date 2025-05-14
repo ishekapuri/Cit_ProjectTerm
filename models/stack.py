@@ -15,3 +15,7 @@ class Stack(db.Model):
 
     def countCards(self):
         return len(self.cards)
+    
+    def addCard(self, card):
+        self.cards.append(card)
+        db.session.commit()
