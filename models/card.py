@@ -8,7 +8,7 @@ class Card(db.Model):
     name = mapped_column(String, nullable=False)
     answer = mapped_column(String, nullable=False)
     flipped = mapped_column(Boolean, default=False)
-
+    stack = db.relationship('Stack', back_populates='cards')
     stack_id = mapped_column(Integer, ForeignKey("stack_table.id"))
 
 
