@@ -24,7 +24,7 @@ class Quiz(db.Model):
                 cards = db.session.execute(db.select(Card).where(Card.stack_id == stackQuiz.stack_id)).scalars()
                 remainingJSON.append({stackQuiz.stack.id: [card.id for card in cards]})
         
-        self.remainingCards = str(remainingJSON)
+        self.remainingCards = str(json.dumps(remainingJSON))
 
     def addStack(self, stack_id):
         stackQuiz = StackQuiz(quiz=self, stack=db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar())

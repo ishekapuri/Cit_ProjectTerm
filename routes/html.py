@@ -52,7 +52,6 @@ def make_quiz_post():
 
     quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
     quiz.init_cards()
-    print(quiz.remainingCards)
 
     db.session.add(quiz)
     db.session.commit()
@@ -64,17 +63,16 @@ def make_quiz_post():
 @html_routes.route("/quiz/<string:quiz_name>", methods=["GET"])
 def quiz_info(quiz_name):
     quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
-    # completedCards = json.loads(quiz.completedCards)
-    # remainingCards = json.loads(quiz.remainingCards)
-    print(quiz.remainingCards)
+    completedCards = json.loads(quiz.completedCards)
+    remainingCards = json.loads(quiz.remainingCards)
     cardList = []
-    # for stack, cards in remainingCards:
-    #     print(stack, cards)
-    #     for card in cards:
-    #         cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
+    for cardDict in remainingCards:
+        for stack_id, cards in cardDict.items():
+            for card in cards:
+                cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
 
     stacks = db.session.execute(db.select(Stack).where(Stack.id.in_(db.session.execute(db.select(StackQuiz.stack_id).where(StackQuiz.quiz_id == quiz.id)).scalars()))).scalars()
-    return render_template("quizInfo.html", quiz=quiz, stacks=stacks, cards=cardList)
+    return render_template("quizInfo.html", quiz=quiz, stacks=stacks, data=cardList)
 
 
 # COLLECTION LIST ==========================================================
