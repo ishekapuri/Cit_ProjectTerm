@@ -5,6 +5,8 @@ from routes.html import html_routes
 from sqlalchemy import select, func, insert
 from models import Collection, Quiz, Stack, StackQuiz
 
+# testing
+
 def create_app():
     # Flask expects template folder to be in the same directory, so we need to specify it in this case
     app = Flask(__name__, template_folder='../templates')
