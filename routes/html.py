@@ -65,14 +65,23 @@ def quiz_info(quiz_name):
     quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
     completedCards = json.loads(quiz.completedCards)
     remainingCards = json.loads(quiz.remainingCards)
-    cardList = []
-    for cardDict in remainingCards:
-        for stack_id, cards in cardDict.items():
-            for card in cards:
-                cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
+    # format: [stackname, stacksize, proficiency]
+    quizStats = []
+    for key, value in remainingCards.items():
+        print(key, value)
+        stack = db.session.execute(db.select(Stack).where(Stack.id == key)).scalar()
+        stackSize = len(value)
+        proficiency = 0
+        if stackSize > 0 and key in completedCards:
+            proficiency = (len(completedCards[key]) / stackSize) * 100
+        quizStats.append([stack.name, stackSize, proficiency])
 
-    stacks = db.session.execute(db.select(Stack).where(Stack.id.in_(db.session.execute(db.select(StackQuiz.stack_id).where(StackQuiz.quiz_id == quiz.id)).scalars()))).scalars()
-    return render_template("quizInfo.html", quiz=quiz, stacks=stacks, data=cardList)
+    cardList = []
+    for stack_id, cards in remainingCards.items():
+        for card in cards:
+            cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
+
+    return render_template("quizInfo.html", quiz=quiz, stats=quizStats, data=cardList)
 
 
 # COLLECTION LIST ==========================================================

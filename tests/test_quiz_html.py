@@ -58,8 +58,8 @@ def test_create_quiz_success(client2):
     assert quiz.name == "Test Quiz"
     assert quiz.isComplete is False
     assert len(quiz.contents) == 2
-    assert quiz.completedCards == str([])
-    assert quiz.remainingCards == '[{"1": [1, 2]}, {"2": [3]}]'
+    assert quiz.completedCards == '{}'
+    assert quiz.remainingCards == '{"1": [1, 2], "2": [3]}'
     assert response.status_code == 200
 
 def test_create_quiz_fail_no_name(client2):

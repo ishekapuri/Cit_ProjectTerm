@@ -20,11 +20,11 @@
             </tr>
         </thead>
         <tbody>
-            {% for stack in stacks %}
+            {% for stat in stats %}
                 <tr>
-                <th scope="row">{{ stack.name }}</th>
-                <td>{{ stack.countCards() }}</td>
-                <td>Otto</td>
+                <th scope="row">{{ stat[0] }}</th>
+                <td>{{ stat[1] }}</td>
+                <td>{{ stat[2] }}</td>
                 </tr>
             {% endfor %}
         </tbody>
