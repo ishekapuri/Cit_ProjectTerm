@@ -25,13 +25,17 @@ h6 {
   font-weight: 600;
 }
 
-button {
+.textbutton {
   color: #4a4a4a;
   font-weight: 600;
   border: 3px solid #a084ca;
   background-color: white;
   transition: 0.3s;
   border-radius: 5px;
+}
+
+.textbutton:hover {
+  background-color: #e1d5f6;
 }
 
 /* Links */
@@ -53,11 +57,15 @@ a:hover {
   background-size: contain;
   background-color: transparent;
   border: none;
-
+  align-self: left;
   margin: 0;
-  text-align: left;
   width: 40px;
   height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.1);
 }
 
 /* Inputs and Forms */
@@ -253,7 +261,8 @@ input:checked + .slider:before {
   padding: 0px;
 }
 
-.quiz-header h2 {
+.quiz-header h1,
+h2 {
   flex: 1;
   text-align: center;
   margin-left: 40px;

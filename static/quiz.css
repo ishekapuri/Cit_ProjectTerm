@@ -1,4 +1,4 @@
-/* Blur effect */
+
 .blurred {
     backdrop-filter: blur(10px);
     position: fixed;
@@ -17,11 +17,11 @@ button:hover {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1050; /* higher than Bootstrap modals */
+  z-index: 1050;
   width: 100vw;
   height: 100vh;
-  background: rgba(255, 255, 255, 0.95); /* slight background to visually separate */
-  flex-direction: column; /* stack carousel and buttons vertically */
+  background: rgba(255, 255, 255, 0.95);
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
