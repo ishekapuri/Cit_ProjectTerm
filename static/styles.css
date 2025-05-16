@@ -53,9 +53,8 @@ a:hover {
   background-size: contain;
   background-color: transparent;
   border: none;
-
+  align-self: left;
   margin: 0;
-  text-align: left;
   width: 40px;
   height: 40px;
 }
@@ -253,7 +252,8 @@ input:checked + .slider:before {
   padding: 0px;
 }
 
-.quiz-header h2 {
+.quiz-header h1,
+h2 {
   flex: 1;
   text-align: center;
   margin-left: 40px;
