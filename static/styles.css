@@ -7,7 +7,7 @@ body {
 
 /* Container */
 .container {
-  background-color: #ffffff;
+  background-color: white;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(75, 0, 125, 0.1);
@@ -20,10 +20,31 @@ h2,
 h3,
 h4,
 h5,
-h6,
-button {
+h6 {
   color: #5e2ca5;
   font-weight: 600;
+}
+
+button {
+  color: #4a4a4a;
+  font-weight: 600;
+  border: 3px solid #a084ca;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.textbutton {
+  color: #4a4a4a;
+  font-weight: 600;
+  border: 3px solid #a084ca;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.textbutton:hover {
+  background-color: #e1d5f6;
 }
 
 /* Links */
@@ -38,15 +59,22 @@ a:hover {
 }
 
 /* Buttons */
-.btn-primary {
-  background-color: white;
-  border-color: black;
-  color: #7c4dff;
+
+.btn-general {
+  background-image: url("home-button-svgrepo-com.svg");
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  align-self: left;
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
 }
 
-.btn-primary:hover {
-  background-color: #5e2ca5;
-  border-color: black;
+.btn-general:hover {
+  transform: scale(1.1);
 }
 
 /* Inputs and Forms */
@@ -101,7 +129,8 @@ select:focus {
   text-decoration: underline;
 }
 
-h1 {
+h1,
+h2 {
   text-align: center;
 }
 
@@ -110,8 +139,8 @@ h1 {
   height: 80px;
   margin-right: 10px;
   text-wrap: auto;
-  box-shadow: 5px -5px 0 -3px white, 5px -5px teal, 10px -10px 0 -3px white,
-    10px -10px teal;
+  box-shadow: 5px -5px 0 -3px white, 5px -5px #cac084, 10px -10px 0 -3px white,
+    10px -10px #84cac0;
   transition: box-shadow 1s, top 1s, left 1s;
   position: relative;
   top: 0;
@@ -121,6 +150,159 @@ h1 {
 .btn-stack:hover {
   top: -10px;
   left: 10px;
-  box-shadow: 0px 0px 0 -3px white, 0px 0px teal, 0px 0px 0 -3px white,
-    0px 0px teal;
+  box-shadow: 0px 0px 0 -3px white, 0px 0px #cac084, 0px 0px 0 -3px white,
+    0px 0px #f6e1d5;
+}
+
+/* buttons */
+.card-containers {
+  position: relative;
+  padding: 3rem 1rem 1rem 1rem; /* Top padding ensures space for buttons */
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: white;
+  text-align: center;
+  width: 250px;
+}
+
+.edit-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.delete-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Add this for left-aligned top toggle inside .container */
+.edit-toggle-container {
+  display: flex;
+  justify-content: flex-end; /* Moves content to the right */
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.edit-button, .delete-button {
+  display: none;
+}
+
+
+.edit-mode .edit-button, .edit-mode .delete-button {
+  display: block;
+}
+
+#siteName {
+  margin-top: 20px;
+}
+
+.quiz-header {
+  display: flex;
+  padding: 0px;
+}
+
+.quiz-header h1,
+h2 {
+  flex: 1;
+  text-align: center;
+  margin-left: 40px;
+  margin-right: 0;
+}
+
+.quiz-header a button {
+  margin: 0;
+  text-align: right;
+  width: 40px;
+  height: 40px;
+}
+
+.quiz-create {
+  background-image: url("add-album-svgrepo-com.svg");
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.quiz-create:hover {
+  transform: scale(1.1);
 }

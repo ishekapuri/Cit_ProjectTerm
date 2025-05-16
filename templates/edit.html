@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Edit Flashcard</h2>
+
+    <form method="POST" action="{{ url_for('html_routes.update_card', card_id=card.id) }}">
+        <div class="mb-3">
+            <label for="cardName" class="form-label">Question</label>
+            <input type="text" class="form-control" id="cardName" name="name" value="{{ card.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="cardAnswer" class="form-label">Answer</label>
+            <textarea class="form-control" id="cardAnswer" name="answer" rows="3" required>{{ card.answer }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Card</button>
+        <a href="{{ url_for('html_routes.cards', collection_name=collection_name, stack_name=stack_name) }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

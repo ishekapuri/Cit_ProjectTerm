@@ -5,3 +5,13 @@ for (let i = 0; i < cards.length; i++) {
         innerCard.classList.toggle('flipped');
     });
 }
+
+
+function toggleButtons() {
+    const show = document.getElementById('editToggle').checked;
+    document.querySelector('.container').classList.toggle('edit-mode', show);
+    };
+  
+
+document.addEventListener('DOMContentLoaded', toggleButtons);
+  
