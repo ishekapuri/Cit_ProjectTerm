@@ -25,6 +25,15 @@ h6 {
   font-weight: 600;
 }
 
+button {
+  color: #4a4a4a;
+  font-weight: 600;
+  border: 3px solid #a084ca;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
 .textbutton {
   color: #4a4a4a;
   font-weight: 600;
