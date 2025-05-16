@@ -9,11 +9,9 @@ for (let i = 0; i < cards.length; i++) {
 
 function toggleButtons() {
     const show = document.getElementById('editToggle').checked;
-    const editButtons = document.querySelectorAll('.edit-button');
-    const deleteButtons = document.querySelectorAll('.delete-button');
+    document.querySelector('.container').classList.toggle('edit-mode', show);
+    };
+  
 
-    editButtons.forEach(btn => { btn.classList.toggle('hidden', !show)});
-    deleteButtons.forEach(btn => {btn.classList.toggle('hidden', !show)});
-
-    }
+document.addEventListener('DOMContentLoaded', toggleButtons);
   
