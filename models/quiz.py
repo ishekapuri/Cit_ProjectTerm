@@ -16,7 +16,10 @@ class Quiz(db.Model):
     contents = relationship("StackQuiz", back_populates="quiz")
 
     def init_cards(self):
-        remainingJSON = json.loads(self.remainingCards)
+        if self.remainingCards != "[]":
+            remainingJSON = json.loads("[]")
+        else:
+            remainingJSON = json.loads(self.remainingCards)
         stackQuizzes = db.session.execute(db.select(StackQuiz).where(StackQuiz.quiz_id == self.id)).scalars()
 
         for stackQuiz in stackQuizzes:
@@ -25,6 +28,7 @@ class Quiz(db.Model):
                 remainingJSON.append({stackQuiz.stack_id : card.id})
         
         self.remainingCards = json.dumps(remainingJSON)
+        db.session.commit()
 
     def addStack(self, stack_id):
         stackQuiz = StackQuiz(quiz=self, stack=db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar())
@@ -40,8 +44,8 @@ class Quiz(db.Model):
 
     def randomize_Cards(self):
         remainingJSON = json.loads(self.remainingCards)
-        remainingJSON = random.shuffle(remainingJSON)
-        self.remainingCards = str(remainingJSON)
+        random.shuffle(remainingJSON)
+        self.remainingCards = json.dumps(remainingJSON)
         db.session.commit()
     
     def update_Quiz_Results(self, completedCards, remainingCards):
@@ -70,5 +74,7 @@ class Quiz(db.Model):
         return {
             "remainingCards": self.remainingCards
         }
-
+    
+    def __str__ (self):
+        return f"Quiz(id={self.id}, name={self.name}, isComplete={self.isComplete}, completedCards={self.completedCards}, remainingCards={self.remainingCards})"
     
