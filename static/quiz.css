@@ -9,10 +9,6 @@
     z-index: 10;
 }
 
-button:hover {
-    background-color: #e1d5f6;
-}
-
 #quiz-overlay {
   position: fixed;
   top: 0;

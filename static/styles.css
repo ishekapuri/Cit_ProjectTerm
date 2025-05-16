@@ -25,6 +25,15 @@ h6 {
   font-weight: 600;
 }
 
+button {
+  color: #4a4a4a;
+  font-weight: 600;
+  border: 3px solid #a084ca;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
 .textbutton {
   color: #4a4a4a;
   font-weight: 600;
@@ -51,7 +60,7 @@ a:hover {
 
 /* Buttons */
 
-.btn-primary {
+.btn-general {
   background-image: url("home-button-svgrepo-com.svg");
   background-position: center;
   background-size: contain;
@@ -64,7 +73,7 @@ a:hover {
   transition: transform 0.3s ease;
 }
 
-.btn-primary:hover {
+.btn-general:hover {
   transform: scale(1.1);
 }
 
