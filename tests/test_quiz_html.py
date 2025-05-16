@@ -2,6 +2,7 @@ import pytest
 from flask import Flask
 from db import db
 from routes.html import html_routes
+from routes.api import api_routes
 from sqlalchemy import select, func, insert
 from models import Collection, Quiz, Stack, Card
 
@@ -12,6 +13,7 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
     app.register_blueprint(html_routes)
+    app.register_blueprint(api_routes)
     return app
 
 # client with 2 stacks, 3 cards
@@ -58,8 +60,8 @@ def test_create_quiz_success(client2):
     assert quiz.name == "Test Quiz"
     assert quiz.isComplete is False
     assert len(quiz.contents) == 2
-    assert quiz.completedCards == str([])
-    assert quiz.remainingCards == [{"1": [1, 2]}, {"2": [3]}]
+    assert quiz.completedCards == '[]'
+    assert quiz.remainingCards == '[{"1": 1}, {"1": 2}, {"2": 3}]'
     assert response.status_code == 200
 
 def test_create_quiz_fail_no_name(client2):

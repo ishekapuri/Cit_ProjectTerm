@@ -65,14 +65,28 @@ def quiz_info(quiz_name):
     quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
     completedCards = json.loads(quiz.completedCards)
     remainingCards = json.loads(quiz.remainingCards)
+    # format: [stackname, stacksize, proficiency]
+    stackList = quiz.getStacks()
     cardList = []
-    for cardDict in remainingCards:
-        for stack_id, cards in cardDict.items():
-            for card in cards:
-                cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
+    quizStats = []
+    for pair in remainingCards:
+        for stack_id, card in pair.items():
+            stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
 
-    stacks = db.session.execute(db.select(Stack).where(Stack.id.in_(db.session.execute(db.select(StackQuiz.stack_id).where(StackQuiz.quiz_id == quiz.id)).scalars()))).scalars()
-    return render_template("quizInfo.html", quiz=quiz, stacks=stacks, data=cardList)
+            cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
+    
+    for stack in stackList:
+        completed = 0
+        total = stack.countCards()
+        for pair in completedCards:
+            pair = json.loads(pair)
+            for stack_id, card in pair.items():
+                if stack.id == int(stack_id):
+                    completed += 1
+        percent = (completed / total)*100
+        quizStats.append([stack.name, stack.collection.name, percent])
+
+    return render_template("quizInfo.html", quiz=quiz, stats=quizStats, data=cardList)
 
 
 # COLLECTION LIST ==========================================================
