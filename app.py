@@ -3,6 +3,8 @@ from db import db
 from pathlib import Path
 from routes.html import html_routes
 
+# test gitignore
+
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"

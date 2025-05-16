@@ -11,6 +11,11 @@ class Stack(db.Model):
     cards = relationship("Card")
     collection = relationship("Collection", back_populates="stacks")
     collection_id = mapped_column(Integer, ForeignKey("collection_table.id"))
+    cards = db.relationship('Card', back_populates='stack')
 
     def countCards(self):
         return len(self.cards)
+    
+    def addCard(self, card):
+        self.cards.append(card)
+        db.session.commit()

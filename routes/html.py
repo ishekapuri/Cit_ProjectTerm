@@ -1,15 +1,19 @@
 from flask import Blueprint, render_template, request
 from db import db
 from models import * 
+import json
 
+## test
 html_routes = Blueprint("html_routes", __name__)
 
+# HOME PAGE ==========================================================
 @html_routes.route("/")
 def home():
     collections = db.session.execute(db.select(Collection)).scalars()
     quizzes = db.session.execute(db.select(Quiz)).scalars()
     return render_template("home.html", collections=collections, quizzes=quizzes)
 
+# MAKE QUIZ ==========================================================
 @html_routes.route("/makeQuiz", methods=["GET"])
 def make_quiz():
     collections = db.session.execute(db.select(Collection)).scalars()
@@ -19,37 +23,57 @@ def make_quiz():
 def make_quiz_post():
     collections = db.session.execute(db.select(Collection)).scalars()
     quizzes = db.session.execute(db.select(Quiz)).scalars()
-
     quiz_name = request.form.get("quiz_name")
+    stack_ids = request.form.getlist("stack_ids")
+
     if quiz_name == "":
         return render_template("makeQuiz.html", 
                                error="Please enter a name for the quiz.",
                                 collections=collections,
-                                quizzes=quizzes)
+                                quizzes=quizzes), 400
     if db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar() is not None:
         return render_template("makeQuiz.html", 
                                error="Quiz name already exists.",
                                 collections=collections,
-                                quizzes=quizzes)
-    
-    quiz = Quiz(name=quiz_name)
-    db.session.add(quiz)
-    stack_ids = request.form.getlist("stack_ids")
-
+                                quizzes=quizzes), 400
     if len(stack_ids) == 0:
         return render_template("makeQuiz.html", 
                                error="Please select at least one stack.",
                                 collections=collections,
-                                quizzes=quizzes)
+                                quizzes=quizzes), 400
+    
+    quiz = Quiz(name=quiz_name)
+    db.session.add(quiz)
     
     for stack_id in stack_ids:
         stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
         db.session.add(StackQuiz(quiz=quiz, stack=stack))
-    db.session.commit()
+    quizzes = db.session.execute(db.select(Quiz)).scalars()
 
+    quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
+    quiz.init_cards()
+
+    db.session.add(quiz)
+    db.session.commit()
 
     # goes to home after creating quiz (for now)
     return render_template("home.html", collections=collections, quizzes=quizzes)
+
+# QUIZ INFO ==========================================================
+@html_routes.route("/quiz/<string:quiz_name>", methods=["GET"])
+def quiz_info(quiz_name):
+    quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
+    completedCards = json.loads(quiz.completedCards)
+    remainingCards = json.loads(quiz.remainingCards)
+    cardList = []
+    for cardDict in remainingCards:
+        for stack_id, cards in cardDict.items():
+            for card in cards:
+                cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
+
+    stacks = db.session.execute(db.select(Stack).where(Stack.id.in_(db.session.execute(db.select(StackQuiz.stack_id).where(StackQuiz.quiz_id == quiz.id)).scalars()))).scalars()
+    return render_template("quizInfo.html", quiz=quiz, stacks=stacks, data=cardList)
+
 
 # COLLECTION LIST ==========================================================
 @html_routes.route("/collections")
@@ -71,11 +95,43 @@ def cards(collection_name, stack_name):
     cards = db.session.execute(db.select(Card).where(Card.stack_id == stack_id)).scalars()
     return render_template("cards.html", stack=stack_name, data=cards)
 
-@html_routes.route("/quizzes", methods=["GET"])
-def quizzes():
-    quizzes = db.session.execute(db.select(Quiz)).scalars()
-    return render_template("quizzes.html", data=quizzes)
 
 
 
 
+# # DELETE CARD ========================================
+
+
+@html_routes.route("/delete_card/<int:card_id>", methods=["POST"])
+def delete_card(card_id):
+    card = db.session.get(Card, card_id)
+    stack_id = card.stack_id
+    db.session.delete(card)
+    db.session.commit()
+
+    stack = db.session.get(Stack, stack_id)
+    cards = db.session.execute(
+    db.select(Card).where(Card.stack_id == stack_id)).scalars()
+    
+    return render_template("cards.html", stack=stack.name, data=cards)
+
+@html_routes.route('/edit/<int:card_id>', methods=['GET'])
+def edit_card(card_id):
+    card = db.session.get(Card, card_id)
+    return render_template("edit.html", card=card, collection_name=card.stack.collection.name, stack_name=card.stack.name)
+
+
+@html_routes.route('/update/<int:card_id>', methods=['POST'])
+def update_card(card_id):
+    card = db.session.get(Card, card_id)
+    stack_id = card.stack_id
+    card.name = request.form['name']
+    card.answer = request.form['answer']
+
+    db.session.commit()
+
+    stack = db.session.get(Stack, stack_id)
+    cards = db.session.execute(
+    db.select(Card).where(Card.stack_id == stack_id)).scalars()
+    
+    return render_template("cards.html", stack=stack.name, data=cards)
