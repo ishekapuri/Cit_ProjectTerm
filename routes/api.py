@@ -6,7 +6,7 @@ import json
 api_routes = Blueprint("api_routes", __name__)
 
 # Quiz Details ==========================================================
-@api_routes.route("/api/quiz/<string:quiz_name>")
+@api_routes.route("/quiz/<string:quiz_name>/api")
 def quiz_details(quiz_name):
     quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
     if not quiz:
@@ -14,8 +14,16 @@ def quiz_details(quiz_name):
 
     return jsonify(quiz.to_json())
 
+@api_routes.route("/quiz/<string:quiz_name>/api/remCards")
+def quiz_details_cards(quiz_name):
+    quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
+    if not quiz:
+        return {"message": f"Name {quiz_name} not found"}, 404
+
+    return jsonify(quiz.rem_cards_to_json())
+
 # Update Quiz ==========================================================
-@api_routes.route("/api/quiz/<string:quiz_name>/update", methods=["POST"])
+@api_routes.route("/quiz/<string:quiz_name>/api/update", methods=["POST"])
 def update_quiz_mastery(quiz_name):
     quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
     if not quiz:

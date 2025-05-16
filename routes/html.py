@@ -66,20 +66,22 @@ def quiz_info(quiz_name):
     completedCards = json.loads(quiz.completedCards)
     remainingCards = json.loads(quiz.remainingCards)
     # format: [stackname, stacksize, proficiency]
-    quizStats = []
-    for key, value in remainingCards.items():
-        print(key, value)
-        stack = db.session.execute(db.select(Stack).where(Stack.id == key)).scalar()
-        stackSize = len(value)
-        proficiency = 0
-        if stackSize > 0 and key in completedCards:
-            proficiency = (len(completedCards[key]) / stackSize) * 100
-        quizStats.append([stack.name, stackSize, proficiency])
-
+    stackList = quiz.getStacks()
     cardList = []
-    for stack_id, cards in remainingCards.items():
-        for card in cards:
+    quizStats = []
+    for pair in remainingCards:
+        for stack_id, card in pair.items():
+            stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
+
             cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
+    
+    for stack in stackList:
+        count = 0
+        for pair in completedCards:
+            for stack_id, card in pair.items():
+                if stack.id == stack_id:
+                    count += 1
+        quizStats.append([stack.name, stack.countCards(), count])
 
     return render_template("quizInfo.html", quiz=quiz, stats=quizStats, data=cardList)
 

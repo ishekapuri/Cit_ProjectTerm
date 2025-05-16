@@ -10,8 +10,8 @@ class Quiz(db.Model):
     id = mapped_column(Integer, primary_key=True)
     name = mapped_column(String, nullable=False)
     isComplete = mapped_column(Boolean, default=False)
-    completedCards = mapped_column(String, default="{}")
-    remainingCards = mapped_column(String, default="{}")
+    completedCards = mapped_column(String, default="[]")
+    remainingCards = mapped_column(String, default="[]")
 
     contents = relationship("StackQuiz", back_populates="quiz")
 
@@ -22,7 +22,8 @@ class Quiz(db.Model):
         for stackQuiz in stackQuizzes:
             if stackQuiz.stack_id not in remainingJSON:
                 cards = db.session.execute(db.select(Card).where(Card.stack_id == stackQuiz.stack_id)).scalars()
-                remainingJSON[stackQuiz.stack.id] = [card.id for card in cards]
+                for card in cards:
+                    remainingJSON.append({stackQuiz.stack_id : card.id})
         
         self.remainingCards = json.dumps(remainingJSON)
 
@@ -63,6 +64,11 @@ class Quiz(db.Model):
             "name": self.name,
             "isComplete": self.isComplete,
             "completedCards": self.completedCards,
+            "remainingCards": self.remainingCards
+        }
+    
+    def rem_cards_to_json(self):
+        return {
             "remainingCards": self.remainingCards
         }
 
