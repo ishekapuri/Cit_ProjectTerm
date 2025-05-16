@@ -76,12 +76,13 @@ def quiz_info(quiz_name):
             cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
     
     for stack in stackList:
-        count = 0
+        completed = 0
+        total = stack.countCards()
         for pair in completedCards:
             for stack_id, card in pair.items():
                 if stack.id == stack_id:
-                    count += 1
-        quizStats.append([stack.name, stack.countCards(), count])
+                    completed += 1
+        quizStats.append([stack.name, stack.collection.name, f'{completed}/{total}'])
 
     return render_template("quizInfo.html", quiz=quiz, stats=quizStats, data=cardList)
 

@@ -23,7 +23,7 @@ def quiz_details_cards(quiz_name):
     return jsonify(quiz.rem_cards_to_json())
 
 # Update Quiz ==========================================================
-@api_routes.route("/quiz/<string:quiz_name>/api/update", methods=["POST"])
+@api_routes.route("/quiz/<string:quiz_name>/api/update", methods=["PUT"])
 def update_quiz_mastery(quiz_name):
     quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
     if not quiz:

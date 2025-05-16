@@ -15,7 +15,7 @@
         <thead>
             <tr>
             <th scope="col">Stack</th>
-            <th scope="col">Number of Cards</th>
+            <th scope="col">Topic</th>
             <th scope="col">Mastery</th>
             </tr>
         </thead>
@@ -37,8 +37,6 @@
         <h1 class="deckName">{{ stack }}</h1>
 
         <div id="quiz-overlay" class="d-none">
-            <button onclick="stopQuiz()">Stop for Now</button>
-
             <div id="cardCarousel" class="carousel slide" data-bs-interval="false">
                 <div class="carousel-inner">
                     {% for card in data %}
@@ -62,12 +60,13 @@
 
             <!-- Custom buttons BELOW carousel -->
             <div class="d-flex justify-content-center gap-3 mt-3">
-                <button class="btn btn-success" type="button" data-bs-target="#cardCarousel" data-bs-slide="next" onclick="logResult()">
+                <button class="btn btn-success" type="button" data-bs-target="#cardCarousel" data-bs-slide="next" onclick="addCompletedCard()">
                     Remembered
                 </button>
                 <button class="btn btn-danger" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
                     Forgotten
                 </button>
+                <button onclick="stopQuiz()">Stop for Now</button>
             </div>
         </div>
         <div>

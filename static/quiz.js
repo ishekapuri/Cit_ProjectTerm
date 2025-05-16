@@ -11,33 +11,47 @@ async function getData() {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    completedCards = await response.json();
-    console.log(completedCards);
+    remainingCards = await response.json();
+
+    console.log(remainingCards);
   } catch (error) {
     console.error(error.message);
   }
 }
 
 
-function startQuiz() {
+async function startQuiz() {
     const quizContainer = document.getElementById("quiz-overlay");
     quizContainer.className = "d-flex justify-content-center align-items-center";
     quizContainer.classList.add('blurred')
-    getData()
+    await getData()
 }
 
 function stopQuiz() {
     const quizContainer = document.getElementById("quiz-overlay");
     quizContainer.className = "d-none";
     quizContainer.classList.remove('blurred')
+    logResult()
 }
 
 function addCompletedCard() {
-
+    card = remainingCards[currentSlide];
+    console.log(card);
+    completedCards.push(card);
+    console.log(completedCards);
 }
 
-function logResult() {
-    console.log(completedCards);
+async function logResult() {
+    try {
+        var url = window.location.href + "/api/update";
+        const response = await fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(completedCards),
+        });
+    } catch (error) {
+        console.error(error.message);
+    }
+
 }
 
 var myCarousel = document.querySelector('#cardCarousel')
