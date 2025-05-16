@@ -25,11 +25,15 @@
                         <div>
                             <h4>{{ collection.name }}</h4>
                         </div>
-                        <div class="m-2 p-3 border border-black d-flex flex-wrap">
+                        <div class="m-2 p-3 d-flex flex-wrap">
                             {% for stack in collection.stacks %}
-                                <div class="m-2 p-3 border border-black d-flex flex-wrap">
-                                    <h6>{{ stack.name }}</h6>
-                                    <input type="checkbox" name="stack_ids" id="stack_ids" value="{{ stack.id }}">
+                                <div>
+                                    <label class="d-grid">
+                                        <button type="button" class="btn-stack mb-2" onclick="document.getElementById('stack_{{ stack.id }}').click();">
+                                            {{ stack.name }}
+                                        </button>
+                                        <input type="checkbox" name="stack_ids" id="stack_{{ stack.id }}" value="{{ stack.id }}">
+                                    </label>
                                 </div>
                             {% endfor %}
                         </div>        

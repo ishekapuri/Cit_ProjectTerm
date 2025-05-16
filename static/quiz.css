@@ -8,3 +8,7 @@
     top: 0;
     z-index: 10;
 }
+
+button:hover {
+    background-color: #e1d5f6;
+}
