@@ -261,6 +261,15 @@ input:checked + .slider:before {
   display: none;
 }
 
+.edit-button, .delete-button {
+  display: none;
+}
+
+
+.edit-mode .edit-button, .edit-mode .delete-button {
+  display: block;
+}
+
 #siteName {
   margin-top: 20px;
 }
