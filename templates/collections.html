@@ -2,6 +2,9 @@
 
 <h1>Collections list</h1>
 <div class="d-flex flex-wrap">
+  <a href="{{ url_for('html_routes.home')}}">
+    <button class="btn-primary"></button>
+  </a>
   {% for collection in data %}
   <div class="m-2 p-3 border border-black text-center">
     <h4>{{ collection.name }}</h4>
