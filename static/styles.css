@@ -51,7 +51,7 @@ a:hover {
 
 /* Buttons */
 
-.btn-primary {
+.btn-general {
   background-image: url("home-button-svgrepo-com.svg");
   background-position: center;
   background-size: contain;
@@ -64,7 +64,7 @@ a:hover {
   transition: transform 0.3s ease;
 }
 
-.btn-primary:hover {
+.btn-general:hover {
   transform: scale(1.1);
 }
 
