@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 from db import db
 from models import * 
-import json
+import json, math
 
 ## test
 html_routes = Blueprint("html_routes", __name__)
@@ -72,7 +72,6 @@ def quiz_info(quiz_name):
     for pair in remainingCards:
         for stack_id, card in pair.items():
             stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
-
             cardList.append(db.session.execute(db.select(Card).where(Card.id == card)).scalar())
     
     for stack in stackList:
@@ -83,7 +82,7 @@ def quiz_info(quiz_name):
             for stack_id, card in pair.items():
                 if stack.id == int(stack_id):
                     completed += 1
-        percent = (completed / total)*100
+        percent = math.floor((completed / total)*100)
         quizStats.append([stack.name, stack.collection.name, percent])
 
     return render_template("quizInfo.html", quiz=quiz, stats=quizStats, data=cardList)
@@ -115,10 +114,10 @@ def cards(collection_name, stack_name):
 
 # # DELETE CARD ========================================
 
-
 @html_routes.route("/delete_card/<int:card_id>", methods=["POST"])
 def delete_card(card_id):
     card = db.session.get(Card, card_id)
+    
     stack_id = card.stack_id
     db.session.delete(card)
     db.session.commit()
@@ -126,6 +125,11 @@ def delete_card(card_id):
     stack = db.session.get(Stack, stack_id)
     cards = db.session.execute(
     db.select(Card).where(Card.stack_id == stack_id)).scalars()
+
+    quizlist = db.session.execute(db.select(Quiz)).scalars()
+    for quiz in quizlist:
+        quiz.init_cards()
+    db.session.commit()
     
     return render_template("cards.html", stack=stack.name, data=cards)
 

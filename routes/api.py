@@ -39,3 +39,14 @@ def update_quiz_mastery(quiz_name):
 
     db.session.commit()
     return jsonify(quiz.to_json()), 200
+
+# Shuffle Quiz 
+
+@api_routes.route("/quiz/<string:quiz_name>/api/shuffle", methods=["PUT"])
+def shuffle_quiz(quiz_name):
+    quiz = db.session.execute(db.select(Quiz).where(Quiz.name == quiz_name)).scalar()
+    if not quiz:
+        return {"message": f"Name {quiz_name} not found"}, 404
+
+    quiz.randomize_Cards()
+    return "success", 201

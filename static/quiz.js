@@ -20,7 +20,6 @@ async function getData() {
   }
 }
 
-
 async function startQuiz() {
     const quizContainer = document.getElementById("quiz-overlay");
     quizContainer.classList.remove("d-none");
@@ -56,7 +55,22 @@ async function logResult() {
     } catch (error) {
         console.error(error.message);
     }
+}
 
+async function shuffleCards() {
+    try {
+        var url = window.location.href + "/api/shuffle";
+        const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(completedCards),
+        });
+    } catch (error) {
+        console.error(error.message);
+    }
+    location.reload();
 }
 
 var myCarousel = document.querySelector('#cardCarousel')
