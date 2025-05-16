@@ -7,7 +7,7 @@ body {
 
 /* Container */
 .container {
-  background-color: #ffffff;
+  background-color: white;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(75, 0, 125, 0.1);
@@ -20,10 +20,18 @@ h2,
 h3,
 h4,
 h5,
-h6,
-button {
+h6 {
   color: #5e2ca5;
   font-weight: 600;
+}
+
+button {
+  color: #4a4a4a;
+  font-weight: 600;
+  border: 3px solid #a084ca;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 5px;
 }
 
 /* Links */
@@ -101,7 +109,7 @@ select:focus {
   text-decoration: underline;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
 }
 
@@ -110,8 +118,8 @@ h1 {
   height: 80px;
   margin-right: 10px;
   text-wrap: auto;
-  box-shadow: 5px -5px 0 -3px white, 5px -5px teal, 10px -10px 0 -3px white,
-    10px -10px teal;
+  box-shadow: 5px -5px 0 -3px white, 5px -5px #cac084, 10px -10px 0 -3px white,
+    10px -10px #84cac0;
   transition: box-shadow 1s, top 1s, left 1s;
   position: relative;
   top: 0;
@@ -121,8 +129,8 @@ h1 {
 .btn-stack:hover {
   top: -10px;
   left: 10px;
-  box-shadow: 0px 0px 0 -3px white, 0px 0px teal, 0px 0px 0 -3px white,
-    0px 0px teal;
+  box-shadow: 0px 0px 0 -3px white, 0px 0px #cac084, 0px 0px 0 -3px white,
+    0px 0px #f6e1d5;
 }
 
 /* buttons */
@@ -230,4 +238,40 @@ input:checked + .slider:before {
 
 .hidden {
   display: none;
+}
+
+#siteName {
+  margin-top: 20px;
+}
+
+.quiz-header {
+    display: flex;
+    padding: 0px;
+}
+
+.quiz-header h2 {
+    flex: 1;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 0;
+}
+
+.quiz-header a button {
+    margin: 0;
+    text-align: right;
+    width: 40px;
+    height: 40px;
+}
+
+.quiz-create {
+  background-image: url('add-album-svgrepo-com.svg');
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.quiz-create:hover {
+  transform: scale(1.1);
 }

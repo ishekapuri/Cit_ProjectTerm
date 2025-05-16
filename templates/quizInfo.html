@@ -29,7 +29,7 @@
             {% endfor %}
         </tbody>
         </table> 
-        <button onclick=startQuiz()>Start Quiz</button>       
+        <button class="quiz-btn" onclick=startQuiz()>Start Quiz</button>       
     </div>
 
     <div class="container">
@@ -67,7 +67,7 @@
                 </button>
             </div>        
         </div>
-        <div class="container">
+        <div>
             <h1 class="deckName">{{ stack }}</h1>
             <div class="d-flex flex-wrap justify-content-center">
                 {% for card in data %}
