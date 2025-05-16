@@ -1,4 +1,4 @@
-name: Test on pull request into dev
+name: Test on push
 
 on:
   pull_request:
