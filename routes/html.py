@@ -79,10 +79,12 @@ def quiz_info(quiz_name):
         completed = 0
         total = stack.countCards()
         for pair in completedCards:
+            pair = json.loads(pair)
             for stack_id, card in pair.items():
-                if stack.id == stack_id:
+                if stack.id == int(stack_id):
                     completed += 1
-        quizStats.append([stack.name, stack.collection.name, f'{completed}/{total}'])
+        percent = (completed / total)*100
+        quizStats.append([stack.name, stack.collection.name, percent])
 
     return render_template("quizInfo.html", quiz=quiz, stats=quizStats, data=cardList)
 

@@ -29,15 +29,13 @@ def update_quiz_mastery(quiz_name):
     if not quiz:
         return {"message": f"Name {quiz_name} not found"}, 404
 
-    data = request.json()
+    data = request.get_json()
     if not data:
         return {"message": "No data provided"}, 400
     
-    completedCards = data["completedCards"]
-    remainingCards = data["remainingCards"]
-    quiz.completedCards = jsonify(completedCards)
-    quiz.remainingCards = jsonify(remainingCards)
+    completedCards = data
+
+    quiz.completedCards = json.dumps(completedCards)
 
     db.session.commit()
-
-    return render_template("quiz_details.html", quiz=quiz, stacks=quiz.stacks, cards=quiz.cards)
+    return jsonify(quiz.to_json()), 200

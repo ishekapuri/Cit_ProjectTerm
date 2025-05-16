@@ -59,7 +59,8 @@ def client2(app_with_data):
 
 def test_homepage(client):
     response = client.get("/")
-    assert b"<h1>Stackables</h1>" in response.data
+    assert b"<h2>Quizzes</h2>" in response.data
+    assert b"<h2>Collections</h2>" in response.data
     assert response.status_code == 200
 
 

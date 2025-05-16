@@ -20,10 +20,9 @@ class Quiz(db.Model):
         stackQuizzes = db.session.execute(db.select(StackQuiz).where(StackQuiz.quiz_id == self.id)).scalars()
 
         for stackQuiz in stackQuizzes:
-            if stackQuiz.stack_id not in remainingJSON:
-                cards = db.session.execute(db.select(Card).where(Card.stack_id == stackQuiz.stack_id)).scalars()
-                for card in cards:
-                    remainingJSON.append({stackQuiz.stack_id : card.id})
+            cards = db.session.execute(db.select(Card).where(Card.stack_id == stackQuiz.stack_id)).scalars()
+            for card in cards:
+                remainingJSON.append({stackQuiz.stack_id : card.id})
         
         self.remainingCards = json.dumps(remainingJSON)
 

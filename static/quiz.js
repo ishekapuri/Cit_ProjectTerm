@@ -11,9 +11,10 @@ async function getData() {
       throw new Error(`Response status: ${response.status}`);
     }
 
-    remainingCards = await response.json();
+    var cards = await response.json();
+    remainingCards = JSON.parse(cards.remainingCards);
 
-    console.log(remainingCards);
+    console.log(cards);
   } catch (error) {
     console.error(error.message);
   }
@@ -22,23 +23,24 @@ async function getData() {
 
 async function startQuiz() {
     const quizContainer = document.getElementById("quiz-overlay");
-    quizContainer.className = "d-flex justify-content-center align-items-center";
-    quizContainer.classList.add('blurred')
-    await getData()
+    quizContainer.classList.remove("d-none");
+    quizContainer.classList.add("d-flex");
+    await getData();
 }
 
-function stopQuiz() {
+async function stopQuiz() {
     const quizContainer = document.getElementById("quiz-overlay");
-    quizContainer.className = "d-none";
+    quizContainer.classList.add("d-none");
     quizContainer.classList.remove('blurred')
-    logResult()
+    await logResult();
+    location.reload();
 }
 
 function addCompletedCard() {
     card = remainingCards[currentSlide];
-    console.log(card);
-    completedCards.push(card);
-    console.log(completedCards);
+    console.log(`Card: ${JSON.stringify(card)}`);
+    completedCards.push(JSON.stringify(card));
+    console.log(`Completed Cards: ${JSON.stringify(completedCards)}`);
 }
 
 async function logResult() {
@@ -46,6 +48,9 @@ async function logResult() {
         var url = window.location.href + "/api/update";
         const response = await fetch(url, {
         method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify(completedCards),
         });
     } catch (error) {

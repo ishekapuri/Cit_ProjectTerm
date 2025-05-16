@@ -39,7 +39,14 @@
                 <tr>
                 <th scope="row">{{ stat[0] }}</th>
                 <td>{{ stat[1] }}</td>
-                <td>{{ stat[2] }}</td>
+                <td>
+                     <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="70"
+                        aria-valuemin="0" aria-valuemax="100" style="width:{{ stat[2] }}%">
+                            {{ stat[2] }}%
+                        </div>
+                    </div> 
+                </td>
                 </tr>
             {% endfor %}
         </tbody>

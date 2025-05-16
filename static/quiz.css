@@ -12,3 +12,20 @@
 button:hover {
     background-color: #e1d5f6;
 }
+
+#quiz-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050; /* higher than Bootstrap modals */
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95); /* slight background to visually separate */
+  flex-direction: column; /* stack carousel and buttons vertically */
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  z-index: 2;
+}
