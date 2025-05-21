@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from db import db
 from models import * 
 import json
@@ -105,10 +105,10 @@ def stacks(collection_name):
 # # STACK DETAILS ==========================================================
 @html_routes.route("/collections/<string:collection_name>/<string:stack_name>")
 def cards(collection_name, stack_name):
-    stack_id = (db.session.execute(db.select(Stack).where(Stack.name == stack_name)).scalar()).id
-    cards = db.session.execute(db.select(Card).where(Card.stack_id == stack_id)).scalars()
-    return render_template("cards.html", stack=stack_name, data=cards)
-
+    stack = db.session.execute(db.select(Stack).where(Stack.name == stack_name)).scalar()
+    cards = db.session.execute(db.select(Card).where(Card.stack_id == stack.id)).scalars()
+    collection = db.session.execute(db.select(Collection).where(Collection.name == collection_name)).scalar()
+    return render_template("cards.html", collection=collection, stack=stack, data=cards)
 
 
 
@@ -149,3 +149,58 @@ def update_card(card_id):
     db.select(Card).where(Card.stack_id == stack_id)).scalars()
     
     return render_template("cards.html", stack=stack.name, data=cards)
+
+@html_routes.route('/create_collection', methods=['GET', 'POST'])
+def create_collection():
+    if request.method == 'POST':
+        name = request.form.get('collection_name')
+        if name:
+            new_collection = Collection(name=name)
+            db.session.add(new_collection)
+            db.session.commit()
+            collections = db.session.execute(db.select(Collection)).scalars().all()
+            return render_template("home.html", collections=collections)
+        return render_template('createCollection.html', error="Collection name is required.")
+    return render_template('createCollection.html')
+
+
+@html_routes.route('/create_stack/<string:collection_name>', methods=['GET', 'POST'])
+def create_stack(collection_name):
+    collection = db.session.execute(db.select(Collection).where(Collection.name == collection_name)).scalar()
+
+    if request.method == 'POST':
+        stack_name = request.form.get('stack_name')
+        if stack_name:
+            new_stack = Stack(name=stack_name, collection=collection)
+            db.session.add(new_stack)
+            db.session.commit()
+            collections = db.session.execute(db.select(Collection)).scalars().all()
+            return render_template("home.html", collections=collections)
+        return render_template('createStack.html', error="Stack name is required.", collection_name=collection_name)
+    return render_template('createStack.html', collection_name=collection_name)
+
+
+@html_routes.route('/create_card/<string:stack_name>', methods=['GET', 'POST'])
+def create_card(stack_name):
+    stack = db.session.execute(db.select(Stack).where(Stack.name == stack_name)).scalar()
+    if request.method == 'POST':
+        card_name = request.form.get('name')
+        card_answer = request.form.get('answer')
+
+        if not card_name or not card_answer:
+            return render_template('createCard.html', stack=stack, error="Both fields are required.")
+
+        new_card = Card(name=card_name, answer=card_answer, stack=stack)
+        db.session.add(new_card)
+        db.session.commit()
+        return redirect(url_for('html_routes.cards', collection_name=stack.collection.name, stack_name=stack.name))
+    return render_template('createCard.html', stack=stack)
+
+
+@html_routes.route('/delete_stack/<string:stack_name>', methods=['POST'])
+def delete_stack(stack_name):
+    stack = db.session.execute(db.select(Stack).where(Stack.name == stack_name)).scalar()
+    db.session.delete(stack)
+    db.session.commit()
+    collections = db.session.execute(db.select(Collection)).scalars().all()
+    return render_template("home.html", collections=collections)

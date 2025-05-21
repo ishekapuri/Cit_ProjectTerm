@@ -27,9 +27,19 @@
           <button class="btn-general"></button>
         </a>
 
-        <h1 class="deckName">{{ stack }}</h1>
+        <h1 class="deckName">{{ stack.name }}</h1>
+
 
         <div class="edit-toggle-container">
+          <div class="delete-stack-button">
+            <form method="POST" action="{{ url_for('html_routes.delete_stack', stack_name=stack.name) }}" onsubmit="return confirm('Are you sure you want to delete this stack? This cannot be undone.');">
+              <button type="submit" class="btn btn-danger mt-2">Delete Stack</button>
+            </form>
+          </div>
+          <a href="{{ url_for('html_routes.create_card', stack_name=stack.name) }}">
+            <button class="quiz-create" id="addCardButton" title="Add Card">
+            </button>
+          </a>
           <label class="switch me-2">
             <input type="checkbox" id="editToggle" onchange="toggleButtons()" />
             <span class="slider"></span>
