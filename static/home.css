@@ -3,4 +3,10 @@
   white-space: nowrap;
 }
 
-/* class="m-2 p-3 border border-black"*/
+.delete-stack-button {
+  display: none;
+}
+
+.edit-mode .delete-stack-button {
+  display: block;
+}

@@ -30,7 +30,12 @@
     </div>
     <div class="container">
         <div>
-            <h2>Collections</h2>
+            <div class="collection-header">
+                <h2>Collections</h2>
+                <a href="{{ url_for('html_routes.create_collection') }}"> 
+                    <button type="button" class="quiz-create"> </button>
+                </a>
+            </div>
             {% for collection in collections %}
                 <div>
                     <h4>{{ collection.name }}</h4>
@@ -43,6 +48,11 @@
                         </div>
                     </a>
                     {% endfor %}
+                    <div class="stack">
+                        <a href="{{ url_for('html_routes.create_stack', collection_name=collection.name) }}">
+                            <button type="button" class="quiz-create"></button>
+                        </a>
+                    </div>
                 </div>        
             {% endfor %}    
         </div>
