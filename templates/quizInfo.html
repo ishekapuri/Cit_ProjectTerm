@@ -85,13 +85,13 @@
 
             <!-- Custom buttons BELOW carousel -->
             <div class="d-flex justify-content-center gap-3 mt-3">
-                <button class="btn btn-success" type="button" data-bs-target="#cardCarousel" data-bs-slide="next" onclick="addCompletedCard()">
+                <button class="btn btn-success quiz-btn" type="button" data-bs-target="#cardCarousel" data-bs-slide="next" onclick="addCompletedCard(this)">
                     Remembered
                 </button>
-                <button class="btn btn-danger" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+                <button class="btn btn-danger quiz-btn" type="button" data-bs-target="#cardCarousel" data-bs-slide="next" onclick="forgotCard(this)">
                     Forgotten
                 </button>
-                <button onclick="stopQuiz()">Stop for Now</button>
+                <button class="quiz-btn" onclick="stopQuiz()">Stop for Now</button>
             </div>
         </div>
         <div>
