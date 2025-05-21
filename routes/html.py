@@ -122,7 +122,7 @@ def delete_card(card_id):
     db.session.delete(card)
     db.session.commit()
 
-    stack = db.session.get(Stack, stack_id)
+    stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
     cards = db.session.execute(
     db.select(Card).where(Card.stack_id == stack_id)).scalars()
 
@@ -131,7 +131,7 @@ def delete_card(card_id):
         quiz.init_cards()
     db.session.commit()
     
-    return render_template("cards.html", stack=stack.name, data=cards)
+    return render_template("cards.html", stack=stack, data=cards)
 
 @html_routes.route('/edit/<int:card_id>', methods=['GET'])
 def edit_card(card_id):
