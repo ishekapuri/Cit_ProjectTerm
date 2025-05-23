@@ -3,7 +3,6 @@ from db import db
 from models import * 
 import json, math
 
-## test
 html_routes = Blueprint("html_routes", __name__)
 
 # HOME PAGE ==========================================================
@@ -122,7 +121,7 @@ def delete_card(card_id):
     db.session.delete(card)
     db.session.commit()
 
-    stack = db.session.get(Stack, stack_id)
+    stack = db.session.execute(db.select(Stack).where(Stack.id == stack_id)).scalar()
     cards = db.session.execute(
     db.select(Card).where(Card.stack_id == stack_id)).scalars()
 
@@ -131,7 +130,7 @@ def delete_card(card_id):
         quiz.init_cards()
     db.session.commit()
     
-    return render_template("cards.html", stack=stack.name, data=cards)
+    return render_template("cards.html", stack=stack, data=cards)
 
 @html_routes.route('/edit/<int:card_id>', methods=['GET'])
 def edit_card(card_id):
@@ -204,7 +203,8 @@ def create_card(stack_name):
 @html_routes.route('/delete_stack/<string:stack_name>', methods=['POST'])
 def delete_stack(stack_name):
     stack = db.session.execute(db.select(Stack).where(Stack.name == stack_name)).scalar()
+    quizzes = db.session.execute(db.select(Quiz)).scalars()
     db.session.delete(stack)
     db.session.commit()
     collections = db.session.execute(db.select(Collection)).scalars().all()
-    return render_template("home.html", collections=collections)
+    return render_template("home.html", collections=collections, quizzes=quizzes)
